@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanzouCloudSolve", "LanzouCloudSolve\LanzouCloudSolve.csproj", "{02C80008-1747-45F3-8FB5-BBBBCF5372C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{EEE6B591-A117-4CB5-936E-93B3B7E67605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{02C80008-1747-45F3-8FB5-BBBBCF5372C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02C80008-1747-45F3-8FB5-BBBBCF5372C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02C80008-1747-45F3-8FB5-BBBBCF5372C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEE6B591-A117-4CB5-936E-93B3B7E67605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE6B591-A117-4CB5-936E-93B3B7E67605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE6B591-A117-4CB5-936E-93B3B7E67605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE6B591-A117-4CB5-936E-93B3B7E67605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

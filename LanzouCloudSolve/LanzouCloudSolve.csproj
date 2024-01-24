@@ -2,6 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>LanzouCloudSolve（蓝奏云直链解析）</Title>
+    <Description>LanzouCloudSolve是一款用c#开发的蓝奏云直链解析库，可用于获取蓝奏云文件的直接下载链接。</Description>
+    <Copyright>非允许禁止转载</Copyright>
+    <PackageIcon>MenuLogo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Entity-Now/LanzouCloudSolve</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\MenuLogo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.1" />
+  </ItemGroup>
 
 </Project>

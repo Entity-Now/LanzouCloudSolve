@@ -47,7 +47,7 @@ namespace LanzouCloudSolve
         public static async Task DownFile(string url, string savePath, IProgress<double> progress, CancellationToken token)
         {
             var http = new HttpClient();
-            AddHead(http);
+            AddHead(http, true);
 
             await DownloadFileAsync(http, url, savePath, progress, token);
         }

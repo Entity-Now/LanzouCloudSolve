@@ -9,6 +9,8 @@
     <PackageIcon>MenuLogo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Entity-Now/LanzouCloudSolve</RepositoryUrl>
+    <PackageProjectUrl>https://www.nuget.org/packages/LanzouCloudSolve</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

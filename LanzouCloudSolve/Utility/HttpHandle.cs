@@ -27,9 +27,9 @@ namespace LanzouCloudSolve.Utility
             ["Accept-Language"] = "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6"
         };
 
-        public static void AddHead(HttpClient client)
+        public static void AddHead(HttpClient client, bool downCookie = false)
         {
-            head["Cookie"] = Global.LanZouCookie;
+            head["Cookie"] = downCookie ? Global.LanZouDownCookie : Global.LanZouCookie;
             head["User-Agent"] = GetRandomElement(Global.UserAgents);
             foreach (var item in head)
             {

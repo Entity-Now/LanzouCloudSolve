@@ -32,8 +32,14 @@ namespace LanzouCloudSolve
                 var http1 = await GetAsync(url);
                 // 获取包含下载链接的地址
                 var http2 = await GetAsync(Host + getIframeLink(http1));
+                // 获取随机sign值
+                var randomStr = new Regex(@"(?=\?file=).*(?=')").Match(http2);
+                if (!randomStr.Success)
+                {
+                    throw new Exception("获取随机参数失败~");
+                }
                 // 获取下载链接
-                var http3 = await PostAsync(Host + "ajaxm.php", getSigns(http2));
+                var http3 = await PostAsync(Host + "ajaxm.php" + randomStr.Value, getSigns(http2));
                 var result = StringToJson<LResult>(http3);
 
                 return result;
@@ -70,6 +76,8 @@ namespace LanzouCloudSolve
         static string getSigns(string source)
         {
             var wsk_sign = new Regex(@"(?<=var wsk_sign = ').*(?=';)").Match(source);
+            var aihidcms = new Regex(@"(?<=var aihidcms = ').*(?=';)").Match(source);
+            var ciucjdsdc = new Regex(@"(?<=var ciucjdsdc = ').*(?=';)").Match(source);
             var ws_sign = new Regex(@"(?<=var ws_sign = ').*(?=';)").Match(source);
             var s_sign = new Regex(@"(?<=sign':')(.+?)(?=')").Match(source);
             var ajaxdata = new Regex(@"(?<=var ajaxdata = ').*(?=';)").Match(source);
@@ -77,7 +85,7 @@ namespace LanzouCloudSolve
             {
                 throw new Exception("解析sign请求体的时候出错！");
             }
-            return $"action=downprocess&signs={ajaxdata.Value}&sign={s_sign.Value}&websign={ws_sign.Value}&websignkey={wsk_sign.Value}&ves=1";
+            return $"action=downprocess&signs={ajaxdata.Value}&sign={s_sign.Value}&websign={ciucjdsdc.Value}&websignkey={aihidcms.Value}&ves=1";
         }
     }
 }

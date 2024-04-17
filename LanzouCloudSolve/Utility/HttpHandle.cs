@@ -15,22 +15,23 @@ namespace LanzouCloudSolve.Utility
 {
     public static class HttpHandle
     {
-        static Dictionary<string, string> head = new Dictionary<string, string>()
-        {
-            ["Connection"] = "keep-alive",
-            ["Upgrade-Insecure-Requests"] = "1",
-            ["Cache-Control"] = "max-age=0",
-            ["Sec-Fetch-Site"] = "none",
-            ["Sec-Fetch-Mode"] = "navigate",
-            ["Sec-Fetch-Dest"] = "document",
-            ["Accept-Encoding"] = "gzip, deflate, br",
-            ["Accept-Language"] = "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6"
-        };
 
         public static void AddHead(HttpClient client, bool downCookie = false)
         {
-            head["Cookie"] = downCookie ? Global.LanZouDownCookie : Global.LanZouCookie;
-            head["User-Agent"] = GetRandomElement(Global.UserAgents);
+            Dictionary<string, string> head = new Dictionary<string, string>()
+            {
+                ["Connection"] = "keep-alive",
+                ["Upgrade-Insecure-Requests"] = "1",
+                ["Cache-Control"] = "max-age=0",
+                ["Sec-Fetch-Site"] = "none",
+                ["Sec-Fetch-Mode"] = "navigate",
+                ["Sec-Fetch-Dest"] = "document",
+                ["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*",
+                ["Accept-Encoding"] = "gzip, deflate, br, zstd",
+                ["Accept-Language"] = "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+                ["Cookie"] = downCookie ? Global.LanZouDownCookie : Global.LanZouCookie,
+                ["User-Agent"] = GetRandomElement(Global.UserAgents)
+            };
             foreach (var item in head)
             {
                 client.DefaultRequestHeaders.Add(item.Key, item.Value);
@@ -66,7 +67,8 @@ namespace LanzouCloudSolve.Utility
         public static async Task<string> PostAsync(string url,
             string Body,
             bool AllowAutoRedirect = false, 
-            string ContentType = "application/x-www-form-urlencoded")
+            string ContentType = "application/x-www-form-urlencoded",
+            Action<HttpClient> customHandle = null)
         {
             HttpClientHandler Handler = new HttpClientHandler()
             {
@@ -74,6 +76,10 @@ namespace LanzouCloudSolve.Utility
             };
             HttpClient httpClient = new HttpClient(Handler);
             AddHead(httpClient);
+            if (customHandle != null)
+            {
+                customHandle(httpClient);
+            }
             
             var result = await httpClient.PostAsync(url, new StringContent(Body, Encoding.UTF8, ContentType));
 

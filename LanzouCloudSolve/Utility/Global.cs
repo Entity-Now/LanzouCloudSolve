@@ -7,7 +7,7 @@ namespace LanzouCloudSolve.Utility
     public static class Global
     {
         public static string LanZouCookie = "codelen=1; pc_ad1=1;";
-        public static string LanZouDownCookie = "down_ip=1";
+        public static string LanZouDownCookie = "codelen=1; pc_ad1=1; down_ip=1";
         public static string[] UserAgents =
         {
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",

@@ -25,13 +25,14 @@ namespace LanzouCloudSolve
         public static async Task<LResult > GetLink(string url)
         {
             // 获取蓝奏云的host
-            var Host = new Regex(@"http.?://.+?/").Match(url);
+            var Host = new Regex(@"http.?://.+?(?=/)").Match(url);
             if (Host.Success)
             {
                 // 获取iframe中的地址
                 var http1 = await GetAsync(url);
                 // 获取包含下载链接的地址
-                var http2 = await GetAsync(Host + getIframeLink(http1));
+                string referer = Host + getIframeLink(http1);
+                var http2 = await GetAsync(referer);
                 // 获取随机sign值
                 var randomStr = new Regex(@"(?=\?file=).*(?=')").Match(http2);
                 if (!randomStr.Success)
@@ -39,7 +40,11 @@ namespace LanzouCloudSolve
                     throw new Exception("获取随机参数失败~");
                 }
                 // 获取下载链接
-                var http3 = await PostAsync(Host + "ajaxm.php" + randomStr.Value, getSigns(http2));
+                var http3 = await PostAsync(Host + "/ajaxm.php" + randomStr.Value, getSigns(http2), customHandle: (httpClient) =>
+                {
+                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                    httpClient.DefaultRequestHeaders.Add("Referer", referer);
+                });
                 var result = StringToJson<LResult>(http3);
 
                 return result;
